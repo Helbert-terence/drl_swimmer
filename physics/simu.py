@@ -30,6 +30,8 @@ class SwimmerEnv:
                 motor.max_force = 1e6 
                 self.space.add(motor)
                 self.motors.append(motor)
+                limit = pymunk.RotaryLimitJoint(self.bodies[i-1], self.bodies[i],-135*np.pi/180, 135*np.pi/180)
+                self.space.add(limit)
 
         x = random.uniform(50, 750)
         y = random.uniform(50, 550)
@@ -86,7 +88,7 @@ class SwimmerEnv:
         head = self.bodies[0]
         dx = self.prey.position.x - head.position.x
         dy = self.prey.position.y - head.position.y
-        state.extend([dx, dy])
+        state.extend([dx/800, dy/600])
         return np.array(state, dtype=np.float32)
     
     def reset(self):
@@ -103,9 +105,9 @@ class SwimmerEnv:
             self._apply_water_physics(body)
         head = self.bodies[0]
         prey = self.prey
-        dist_before = np.sqrt((head.position.x - prey.position.x)**2 - (head.position.y - prey.position.y)**2)
+        dist_before = np.sqrt((head.position.x - prey.position.x)**2 + (head.position.y - prey.position.y)**2)
         self.space.step(self.dt)
-        dist_after = np.sqrt((head.position.x - prey.position.x)**2 - (head.position.y - prey.position.y)**2)
+        dist_after = np.sqrt((head.position.x - prey.position.x)**2 + (head.position.y - prey.position.y)**2)
         reward = dist_before - dist_after 
         if dist_after < 10 :
             reward += 100
