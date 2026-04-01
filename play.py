@@ -2,7 +2,7 @@ import torch
 from physics.simu import SwimmerEnv
 from learner.agents import Actor
 
-env = SwimmerEnv()
+env = SwimmerEnv(n_segments=4, length=50)
 state = env.reset()
 
 state_dim = len(state)
@@ -10,7 +10,7 @@ action_dim = len(env.motors)
 max_action = 5.0
 
 actor = Actor(state_dim, action_dim, max_action)
-actor.load_state_dict(torch.load("actor.pth", weights_only=True))
+actor.load_state_dict(torch.load("actorn4l50.pth", weights_only=True))
 actor.eval()
 
 while True:

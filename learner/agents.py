@@ -22,10 +22,17 @@ class Actor(nn.Module):
         mu = self.forward(state)
         sigma = self.log_sigma.clamp(-20, 2).exp()
         dist = Normal(mu, sigma)
-        action = dist.rsample()            
-        log_prob = dist.log_prob(action)    
-        log_prob = log_prob.sum(dim=-1)     
+        action = dist.rsample()
+        log_prob = dist.log_prob(action).sum(dim=-1)
         return action, log_prob
+
+    def evaluate(self, states, actions):
+        mu = self.forward(states)
+        sigma = self.log_sigma.clamp(-20, 2).exp()
+        dist = Normal(mu, sigma)
+        log_prob = dist.log_prob(actions).sum(dim=-1)
+        entropy = dist.entropy().sum(dim=-1)
+        return log_prob, entropy
     
 class Critic(nn.Module):
     def __init__(self, state_dim,):
