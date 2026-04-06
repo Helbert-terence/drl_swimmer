@@ -1,12 +1,8 @@
 # drl_swimmer
 
-A 2D physics-based environment where articulated creatures made of line segments learn to "swim" using Deep Reinforcement Learning.
+A 2D physics-based environment where articulated creatures made of line segments learn to swim and  hunt randomly placed prey using Deep Reinforcement Learning.
 
-Unlike standard rigid-body simulations, flailing in a vacuum doesn't generate forward momentum here. This project implements anisotropic drag (water resistance).
-
-## Key Features
-
-* **Custom Water Physics:** Simulates fluid dynamics through anisotropic friction (segments face high resistance when moving laterally, low resistance longitudinally).
-* **Configurable Morphology:** Easily define the number of segments, their lengths, and the joints connecting them before launching a training session.
-
-
+/physics contains simu.py with the class SwimmerEnv that create all the simulation, the rendering and the rewarding function.
+/learner contains agents.py that have class Actor and Critic to create both neural network.
+main.py launch the PPO training loop with chosen hyperparameters and creature's parameters (number of segments and length of segments), it automatically save .pth files for actors' and critics' neural network.
+play.py replays a trained actor from a .pth file.
