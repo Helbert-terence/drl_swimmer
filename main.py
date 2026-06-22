@@ -11,11 +11,11 @@ GAE_LAMBDA = 0.95
 LR = 3e-4
 CLIP_EPS = 0.2
 K_EPOCHS = 4
-ENTROPY_COEF = 0.01
+ENTROPY_COEF = 0.01 
 RENDER_EVERY = 10**9
 
 # Initialisation
-env = SwimmerEnv()
+env = SwimmerEnv(n_segments=10, length=20)
 state = env.reset()
 
 state_dim = len(state)

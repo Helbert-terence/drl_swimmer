@@ -7,7 +7,7 @@ import pymunk.pygame_util
 
 
 class SwimmerEnv:
-    def __init__(self, n_segments=8, length=20, max_steps=2000):
+    def __init__(self, n_segments=6, length=30, max_steps=2000):
         self.n_segments = n_segments
         self.length = length
         self.max_steps = max_steps

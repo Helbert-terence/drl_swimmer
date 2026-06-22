@@ -37,9 +37,9 @@ class Actor(nn.Module):
 class Critic(nn.Module):
     def __init__(self, state_dim,):
         super(Critic, self).__init__()
-        self.layer1 = nn.Linear(state_dim, 64)
-        self.layer2 = nn.Linear(64, 64)
-        self.layer3 = nn.Linear(64, 1)
+        self.layer1 = nn.Linear(state_dim, 128)
+        self.layer2 = nn.Linear(128, 128)
+        self.layer3 = nn.Linear(128, 1)
 
     def forward(self, state):
         x = F.relu(self.layer1(state))
