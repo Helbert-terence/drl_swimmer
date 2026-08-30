@@ -2,7 +2,9 @@
 
 A 2D physics-based environment where articulated creatures made of line segments learn to swim and hunt randomly placed prey using Deep Reinforcement Learning.
 
-![Trained swimmer](swimmer.gif)
+<p align="center">
+  <img src="swimmer.gif" width="500">
+</p>
 
 `/physics` contains simu.py with the class SwimmerEnv that creates all the simulation, the rendering and the rewarding function.
 
